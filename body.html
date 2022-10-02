@@ -1,0 +1,171 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!--<div class="over">
+  <h3>A-Frame: Custom Fonts</h3>
+</div>-->
+
+  <!--<img id="logo" src="./assets/cesa.png">-->
+  
+  <div id="botones">
+    <!--
+   <img id="btn1" class="btna open" src="./assets/Buttons/script-text-play.png">
+   <img id="btn2" class="btna open" src="./assets/Buttons/chart-bar.png">
+   <img id="btn3" class="btna open" src="./assets/Buttons/chart-pie.png">
+   <img id="btn4" class="btna open" src="./assets/Buttons/chart-scatter-plot.png">
+   <img id="btn5" class="btna open" src="./assets/Buttons/chart-tree.png">
+   <img id="btn6" class="btna open" src="./assets/Buttons/sitemap-outline.png">
+ 
+ 
+   <img id="btn7" class="btnb open" src="./assets/Buttons/magnify.png">
+   <img id="btn8" class="btnb open" src="./assets/Buttons/image-filter-center-focus.png">-->
+ 
+  </div>
+ 
+   <div id="search" class="open">
+     <div id="search-container">
+       <div>
+         <h5 id="text-user">User: --</h5>
+         <h5 id="text-doctor">Doctor: --</h5>
+       </div>
+     </div>
+   </div>
+ 
+ 
+ 
+ 
+   <div id="resume">
+     <div id='resume-close'></div>
+     <div id="resume-container">
+       <div>
+         Nombre completo: <p id="r-name"></p>
+       </div>
+       <div>
+         Especialidad: <p id="r-speciality"></p>
+       </div>
+       <div>
+         Deporte favorito: <p id="r-sport"></p>
+       </div>
+       <div>
+         Hobbies: <p id="r-hobbie"></p>
+       </div>
+       <div>
+         Tiempo de experiencia: <p id="r-extime"></p> 
+       </div>
+     </div>
+   </div>
+ 
+   
+ 
+ 
+ 
+ <a-scene
+   change-view
+   xrextras-gesture-detector
+   landing-page
+   xrextras-loading
+   xrextras-runtime-error
+   xrweb>
+ 
+   <!-- We can define assets here to be loaded when A-Frame initializes -->
+   <a-assets>
+     <!-- Credit to Poly by Google for the model: https://poly.google.com/view/5ZMAz7_ucTn -->
+     <a-asset-item id="bookModel" src="assets/Plane.glb"></a-asset-item>
+     
+     <!--Font file from https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json" -->
+     <!--Asset bundles can't have a .json extension, so rename to ".jsonasset" with optimer_bold.typeface.json as the "main file"-->
+     <a-asset-item id="optimerBoldFont" src="./assets/fonts/optimer_bold.jsonasset"></a-asset-item>
+     <img id="chart" src="./assets/img5.png">
+ 
+   </a-assets>
+ 
+   <a-camera
+     id="camera"
+     position="0 8 8"
+     raycaster="objects: .cantap"
+     cursor="fuse: false; rayOrigin: mouse;">
+   </a-camera>
+ 
+   <a-entity
+     light="
+       type: directional;
+       intensity: 0.8;
+       castShadow: true;
+       shadowMapHeight:2048;
+       shadowMapWidth:2048;
+       shadowCameraBottom: -7;
+       shadowCameraLeft: -7;
+       target: #model;"
+     xrextras-attach="target: model; offset: 1 15 3;"
+     shadow>
+   </a-entity>
+   
+ 
+   <a-light type="ambient" intensity="0.75"></a-light>
+   
+   <a-entity 
+     id="model" 
+     scene-movement
+     gltf-model="#bookModel"
+     position="0 0 0"
+     rotation="0 0 0"
+     shadow="receive: false"
+     xrextras-hold-drag 
+     xrextras-two-finger-rotate
+     xrextras-pinch-scale
+     cubemap-realtime
+     change-color
+     scale="3 3 3">
+ 
+ 
+    <a-entity
+     id="target"
+     avatar
+     position="-1 0 0"
+     rotation="0 30 0"
+     scale="1 1 1"
+     shadow="receive: false">
+   </a-entity>
+     
+ 
+     <a-image
+       id="plot"
+       chart
+       src="#chart" 
+       height="1" 
+       width="1" 
+       position="0 1.7 0"
+       rotation="0 0 0"
+       scale="1.5 1.5 1.5">
+       
+     </a-image>
+   </a-entity>
+   
+ 
+ 
+   
+ 
+   <a-entity 
+       scale="3 3 3" 
+       xrextras-attach="target: model; offset: 0 -0.75 6" 
+       shadow="receive: false"
+       xrextras-hold-drag>
+ 
+     <a-entity
+       position="0 1.635 0"
+       scale="3 3 3"
+       text-font="color: #b9e769">
+     </a-entity>
+ 
+     
+   </a-entity>
+ 
+   <a-plane
+     id="ground" 
+     rotation="-90 0 0" 
+     width="1000" 
+     height="1000" 
+     material="shader: shadow" 
+     shadow>
+   </a-plane>
+ </a-scene>
